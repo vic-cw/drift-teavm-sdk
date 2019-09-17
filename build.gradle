@@ -1,0 +1,21 @@
+buildscript {
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
+
+    dependencies {
+        classpath group: 'com.github.vic-cw', name: 'teavm-gradle-plugin', version: 'db63126'
+        classpath group: 'com.cinnober.gradle', name: 'semver-git', version: '2.4.0'
+    }
+}
+
+plugins {
+    id 'java-gradle-plugin'
+    id 'eclipse'
+    id 'maven-publish'
+}
+
+apply plugin: 'com.edibleday.teavm'
+apply plugin: 'com.cinnober.gradle.semver-git'
+
+group = 'com.github.viccw'
