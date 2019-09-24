@@ -3,6 +3,7 @@ package com.github.viccw.driftteavmsdk;
 import org.teavm.jso.JSBody;
 import org.teavm.jso.JSFunctor;
 import org.teavm.jso.JSObject;
+import org.teavm.jso.JSProperty;
 
 abstract class DriftHandle implements JSObject {
 
@@ -21,4 +22,7 @@ abstract class DriftHandle implements JSObject {
     abstract void on(String eventName, EventHandler eventHandler);
 
     abstract void identify(String userId, JSObject userDetails);
+
+    @JSProperty
+    abstract DriftApiHandle getApi();
 }

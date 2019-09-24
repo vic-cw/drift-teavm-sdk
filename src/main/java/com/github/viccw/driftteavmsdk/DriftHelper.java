@@ -10,14 +10,29 @@ public class DriftHelper {
 
     public void identifyUser(String userId,
             Map<String, String> userDetails) {
+        runWhenDriftIsLoadedAndReady(
+                () -> DriftHandle.getInstance()
+                    .identify(
+                            userId,
+                            JavaScriptOperabilityHelper
+                            .stringMapToJavaScriptObject(
+                                    userDetails)));
+    }
+
+    public void openChat() {
+        runWhenDriftIsLoadedAndReady(
+                () -> DriftHandle.getInstance()
+                    .getApi().openChat());
+    }
+
+    private void runWhenDriftIsLoadedAndReady(Runnable task) {
         runWhenDriftIsLoaded(
                 () -> runWhenDriftIsReady(
-                        () -> DriftHandle.getInstance()
-                            .identify(
-                                    userId,
-                                    JavaScriptOperabilityHelper
-                                    .stringMapToJavaScriptObject(
-                                            userDetails))));
+                        () -> {
+                            if (task != null) {
+                                task.run();
+                            }
+                        }));
     }
 
     private void runWhenDriftIsLoaded(Runnable task) {
